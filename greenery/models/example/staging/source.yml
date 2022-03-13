@@ -1,0 +1,56 @@
+version: 2
+
+sources:
+
+  - name: greenery # name of the source 
+    schema: public # this is the schema our raw data lives in
+    database: dbt # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: addresses 
+        description: >
+          Contains addresses and geo data for greenery users.
+          
+      - name: events 
+        loaded_at_field: created_at
+        description: >
+          Events details for web order events.
+
+      - name: order_items 
+        description: >
+          Product id and quantity for a given order. 
+
+      - name: orders 
+        loaded_at_field: created_at
+        description: >
+          Contains order invormation
+
+      - name: products 
+        description: >
+          Contians name price and inventory status of Greenery products.
+
+      - name: promos 
+        description: >
+          contains discount amount and whether discount
+          is still active.
+          
+      # # this table is not used yet
+      # - name: superheroes 
+      #   loaded_at_field: updated_at
+      #   description: >
+      #     Contains demographic information about some interesting
+      #     characters.
+
+      - name: users 
+        loaded_at_field: updated_at # the timestampe the user was last updated
+        description: >
+          Contains PII including name email and phone number.
