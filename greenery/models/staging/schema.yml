@@ -1,6 +1,5 @@
 version: 2
-## NOTE: dropped all the non_null tests bc too many were failing
-## at some point should more carefully add dq tests back
+
 models:
   - name: stg_addresses
     description: Contains addresses of each user

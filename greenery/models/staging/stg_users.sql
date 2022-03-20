@@ -1,8 +1,7 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
+WITH users_source AS (
+  SELECT *
+  FROM {{ source('greenery', 'users') }}
+)
 
 SELECT 
     user_id,
@@ -13,4 +12,4 @@ SELECT
     created_at,
     updated_at,
     address_id
-FROM {{ source('greenery', 'users') }}
+FROM users_source

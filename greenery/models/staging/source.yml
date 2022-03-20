@@ -43,7 +43,6 @@ sources:
           contains discount amount and whether discount
           is still active.
           
-      # # this table is not used yet
       # - name: superheroes 
       #   loaded_at_field: updated_at
       #   description: >
