@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: user__fct_sessions
+    description: Session information aggregated at the user level
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique:
+              config:
+                store_failures: true  # always store failures
