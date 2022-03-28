@@ -9,6 +9,8 @@ from dbt_zoe_r.metric__global_conversion_rates
 ```
 
 2. What is our conversion rate by product?
+
+
 | product_name        | conversion_rate |
 |---------------------|-----------------|
 | String of pearls    | 0.6094          |
