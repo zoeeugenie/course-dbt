@@ -1,0 +1,25 @@
+
+version: 2
+
+models:
+  - name: metric__global_conversion_rate
+    description: The conversion rate across all time across all products.
+    columns: 
+      - name: conversion_rate
+        tests:
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0  
+            max_value: 1
+            strictly: false
+        - not_null
+
+  - name: metric__product_conversion_rate
+    description: The conversion rate across all time broken down by product.
+    columns: 
+    - name: conversion_rate
+      tests:
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0  
+            max_value: 1
+            strictly: false
+        - not_null

@@ -7,6 +7,15 @@
 WITH fct_orders AS (
   SELECT *
   FROM {{ ref('fct_orders') }}
+),
+
+order_max_min AS (
+    SELECT  
+        user_id,
+        MIN(created_at_utc) AS first_order,
+        MAX(created_at_utc) AS last_order
+    FROM {{ ref('stg_orders') }}
+    GROUP BY user_id
 )
 
 , dim_customers AS (
@@ -33,7 +42,8 @@ FROM(
   FROM dim_customers c
   LEFT JOIN fct_orders o 
     ON c.user_id = o.user_id
-
+  LEFT JOIN order_max_min
+    ON c.user_id = order_max_min.user_id
   {{ dbt_utils.group_by(11)}}
 ) t
 

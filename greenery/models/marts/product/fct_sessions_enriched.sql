@@ -26,6 +26,8 @@ SELECT
     int_session_events_agg.page_view,
     int_session_events_agg.add_to_cart,
     int_session_events_agg.checkout,
+    int_session_events_agg.order_id,
+    int_session_events_agg.product_id,
     int_session_events_agg.package_shipped,
     session_length.first_event              AS first_session_event,
     session_length.last_event               AS last_session_event,
@@ -43,6 +45,4 @@ LEFT JOIN {{ ref('dim_customers') }}
 LEFT JOIN session_length
     ON int_session_events_agg.session_id = session_length.session_id
 LEFT JOIN stg_products
-    ON int_session_events_agg.product_id = stg_produtcs.product_id
-
-
+    ON int_session_events_agg.product_id = stg_products.product_id

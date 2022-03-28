@@ -20,7 +20,6 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
-
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
@@ -32,3 +31,12 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+
+  # for every table the model creates the reporting role can query, etc.
+  post-hook:
+    - "GRANT SELECT ON  {{ this }} TO reporting"
+
+on-run-end: 
+  - "GRANT USAGE ON SCHEMA {{ schema }} TO reporting"
+
+
